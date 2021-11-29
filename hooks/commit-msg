@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+import re
+import sys
+import os
+
+
+def main():
+    pattern = r'(build|upgrade|doc|docs|feat|fix|fixes|perf|perfs|refactor|revert|style|test|tests|merge)(\([\w\-\s]+\))?: .+'
+    filename = sys.argv[1]
+    msg = open(filename, 'r').read()
+    if re.match(pattern, msg) == None:
+        print("\nCOMMIT FAILED!")
+        print("Please enter a commit message in the conventional format and try to commit again.")
+        print("Expected format: type(subject): Description")
+        print("Received commit: " + msg)
+        print("Aborting commit.")
+        exit(1)
+
+
+if __name__ == "__main__":
+    main()

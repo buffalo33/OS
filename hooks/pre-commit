@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+git stash push --keep-index
+
+make check && make valgrind
+status=$?
+
+git reset --hard
+git stash pop --index
+
+exit $status
